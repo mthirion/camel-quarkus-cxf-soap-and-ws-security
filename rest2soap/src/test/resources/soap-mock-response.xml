@@ -1,0 +1,3 @@
+<ns2:RegistrationResponse xmlns:ns2="https://www.herongyang.com/Service/">
+   <Confirmation guest="Jeremy" event="456"/>
+</ns2:RegistrationResponse>

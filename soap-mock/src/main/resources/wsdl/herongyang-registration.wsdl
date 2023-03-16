@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+  xmlns:hy="https://www.herongyang.com/Service/"
+  targetNamespace="https://www.herongyang.com/Service/">
+
+  <wsdl:documentation>
+    Registration_WSDL_11_SOAP_12_Document.wsdl
+    Copyright (c) by Herong Yang. herongyang.com
+    All rights reserved
+  </wsdl:documentation>
+
+  <wsdl:types>
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+      targetNamespace="https://www.herongyang.com/Service/">
+      <xsd:element name="RegistrationRequest">
+        <xsd:complexType>
+          <xsd:complexContent mixed="true">
+            <xsd:restriction base="xsd:anyType">
+              <xsd:sequence>
+                <xsd:element name="Guest" type="xsd:string"
+                  maxOccurs="unbounded"/>
+              </xsd:sequence>
+              <xsd:attribute name="date" type="xsd:date"/>
+              <xsd:attribute name="event" type="xsd:string"/>
+            </xsd:restriction>
+          </xsd:complexContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RegistrationResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Confirmation" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:complexContent>
+                  <xsd:restriction base="xsd:anyType">
+                    <xsd:attribute name="guest" type="xsd:string"/>
+                    <xsd:attribute name="event" type="xsd:string"/>
+                  </xsd:restriction>
+                </xsd:complexContent>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+
+  <wsdl:message name="registrationInputMessage">
+    <wsdl:part name="registrationInputPart"
+      element="hy:RegistrationRequest"/>
+  </wsdl:message>
+  <wsdl:message name="registrationOutputMessage">
+    <wsdl:part name="registrationOutputPart"
+      element="hy:RegistrationResponse"/>
+  </wsdl:message>
+
+  <wsdl:portType name="registrationPortType">
+    <wsdl:operation name="Registration">
+      <wsdl:input name="registrationInput"
+        message="hy:registrationInputMessage"/>
+      <wsdl:output name="registrationOutput"
+        message="hy:registrationOutputMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <wsdl:binding name="registrationBinding"
+    type="hy:registrationPortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Registration">
+      <soap12:operation style="document" soapActionRequired="false"/>
+      <wsdl:input name="registrationInput">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="registrationOutput">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+
+  <wsdl:service name="registrationService">
+    <wsdl:port name="registrationPort"
+      binding="hy:registrationBinding">
+      <soap12:address location=
+        "https://www.herongyang.com/Service/Registration12.php"/>
+    </wsdl:port>
+  </wsdl:service>
+
+</wsdl:definitions>

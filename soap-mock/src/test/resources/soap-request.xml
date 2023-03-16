@@ -1,0 +1,8 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="https://www.herongyang.com/Service/">
+   <soap:Header/>
+   <soap:Body>
+      <ser:RegistrationRequest date="now" event="123">
+         <Guest>John</Guest>
+      </ser:RegistrationRequest>
+   </soap:Body>
+</soap:Envelope>
