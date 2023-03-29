@@ -15,17 +15,18 @@ https://www.herongyang.com/1000230_Live_Examples_of_Web_Services.html
 ![architecture](images/architecture.png?raw=true)
 
 ## Client and server configuration overview
-The server side (soap-mock) has a Camel route that starts with a "from(cxf://)" URI endpoint.
+The server side (soap-mock) has a Camel route that starts with a "from(cxf:bean:)" URI endpoint.
 
 The URI endpoint references the name of a CxfEndpoint Java bean that configures the CXF runtime.  
-While the URI endpoint is used to configure the serviceclass that points to the generated class linked to the portType of the WSDL, the CxfEndpoint is used to configure the service name, endpoint name and exposed URL.  The exposed URL can contain a root prefix, coming from a configuration in the application.properties file.  
+The CxfEndpoint is used to configure the service class, or the service name + endpoint name.  It also defines the data format and the service URL.  The exposed URL can contain a root prefix, coming from a configuration in the application.properties file.  
+Notice that even though it's a less common usage, it's also possible to use the address and the option in the URI instead of the bean, like in the client described here below.  
 
-The client side (rest2soap) has a Camel route that contains a "to(cxf://)" URI endpoint.  In this case, the URI does not require the CxfEndpoint bean and can directly embed the URL of the target SOAP service.
+The client side (rest2soap) has a Camel route that contains a "to(cxf:-address-)" URI endpoint.  In this case, it's more common to avoid the CxfEndpoint bean and directly embed the URL of the target SOAP service with its options.
 
 
 ## Applying WS-Security
 The configuration of WS-Security still leverages the notion of Interceptors in the CXF model.
-For simplicity, the example applies the UsernameToken (without password) WS-Security policy.  The same principle applies for other WS-Security policies as well as other SOAp features, such as WS-Addressing.
+For simplicity, the example applies the UsernameToken (without password) WS-Security policy.  The same principle applies for other WS-Security policies as well as other SOAP features, such as WS-Addressing.
 
 To enable WS-Security on the server side, switch the 'from()' line of the Camel route with the one that contains the "cxfConfigurer" option in the source code.  The cxfConfigurer bean is the entry point to configure the related CXF inbound interceptors.
 
