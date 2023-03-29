@@ -15,8 +15,8 @@ public class CamelRoutes extends RouteBuilder {
     @Override
     public void configure() {
 
-        //from("cxf:registration?serviceClass=https.www_herongyang_com.service.RegistrationPortType&cxfConfigurer=#wssecurity&dataFormat=PAYLOAD")
-        from("cxf:registration?serviceClass=https.www_herongyang_com.service.RegistrationPortType&dataFormat=PAYLOAD")
+        //from("cxf:registration?cxfConfigurer=#wssecurity&dataFormat=PAYLOAD")
+        from("cxf:bean:registration")
         .routeId("soapmock-route")
         .log("CXF Mock : Received request ")
         .log(LoggingLevel.INFO, body().toString())
