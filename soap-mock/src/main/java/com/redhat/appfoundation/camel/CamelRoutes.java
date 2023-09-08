@@ -1,4 +1,4 @@
-package com.redhat.appfoundation.poc.garanti.camel;
+package com.redhat.appfoundation.camel;
 
 
 import javax.enterprise.context.ApplicationScoped;

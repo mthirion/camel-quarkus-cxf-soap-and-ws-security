@@ -1,5 +1,6 @@
-package com.redhat.appfoundation.poc.garanti.camel;
+package com.redhat.appfoundation.camel;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 
 import org.apache.camel.component.cxf.common.DataFormat;
@@ -15,14 +16,9 @@ public class SoapServiceBean extends CxfEndpoint {
     public SoapServiceBean() {
         super();
 
-        try {
-            this.configure();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        
     }
 
+    @PostConstruct
     private void configure() throws ClassNotFoundException {
 
        this.setServiceClass("https.www_herongyang_com.service.RegistrationPortType");

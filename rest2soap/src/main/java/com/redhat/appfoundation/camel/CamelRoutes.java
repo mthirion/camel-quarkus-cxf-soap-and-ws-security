@@ -1,4 +1,4 @@
-package com.redhat.appfoundation.poc.garanti.camel;
+package com.redhat.appfoundation.camel;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -44,7 +44,7 @@ public class CamelRoutes extends RouteBuilder {
         .log("REST 2 SOAP : received Json request")
         .log(body().toString())
 
-        .unmarshal(new JacksonDataFormat(com.redhat.appfoundation.poc.garanti.camel.Registration.class))
+        .unmarshal(new JacksonDataFormat(com.redhat.appfoundation.camel.Registration.class))
 
         .process(e -> {
             Message m = e.getIn();
